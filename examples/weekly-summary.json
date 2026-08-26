@@ -1,0 +1,20 @@
+{
+  "aggregates": [
+    {"column": "amount", "name": "item_count", "op": "count"},
+    {"column": "amount", "name": "total_amount", "op": "sum"}
+  ],
+  "columns": [
+    {"name": "group", "required": true, "source": "Group", "type": "string"},
+    {"name": "amount", "required": true, "source": "Amount", "type": "number"},
+    {"name": "state", "required": true, "source": "State", "type": "string"}
+  ],
+  "deliveries": [{"destination": "review_outbox", "type": "local_copy"}],
+  "filters": [{"column": "state", "op": "eq", "value": "complete"}],
+  "group_by": ["group"],
+  "name": "weekly_summary",
+  "outputs": ["csv", "json", "html"],
+  "quality": {"max_rows": 1000, "min_rows": 1, "reject_blank_output": true, "required_source_columns": ["Group", "Amount", "State"]},
+  "schedule": {"kind": "weekly", "time": "09:00", "weekday": 0},
+  "sort": [{"column": "total_amount", "descending": true}],
+  "source": "weekly.csv"
+}

@@ -1,0 +1,39 @@
+name: Funded direction
+description: Attribute a confirmed public donation transaction to one requested direction.
+title: "[Funded direction] "
+labels: ["funded-direction"]
+body:
+  - type: markdown
+    attributes:
+      value: "Never post private keys, seed phrases, signatures, credentials, or private data. A donation may direct a request but does not guarantee acceptance or delivery."
+  - type: dropdown
+    id: asset
+    attributes:
+      label: Asset
+      options: [Bitcoin, Ethereum/EVM, Dogecoin]
+    validations: {required: true}
+  - type: input
+    id: network
+    attributes:
+      label: Exact network
+      placeholder: Bitcoin, Ethereum mainnet, Polygon, Dogecoin, etc.
+    validations: {required: true}
+  - type: input
+    id: transaction
+    attributes:
+      label: Public transaction hash
+      description: First issue for an unclaimed confirmed inbound hash receives operational request attribution; this is not proof of wallet ownership.
+    validations: {required: true}
+  - type: textarea
+    id: direction
+    attributes:
+      label: Requested direction
+      description: Name one feature, test, documentation area, or report-pipeline direction.
+    validations: {required: true}
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I understand this does not purchase ownership, returns, a deadline, or guaranteed acceptance.
+          required: true
